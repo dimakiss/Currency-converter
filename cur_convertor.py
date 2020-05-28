@@ -8,6 +8,14 @@ class MainApplication(tk.Frame):
 
     font = ("ariel", 12)
 
+    # add icon and name to window
+    def setup_apear(self):
+        window.title("Currency convertor")
+        try:
+            window.iconbitmap("icon.ico")
+        except:
+            pass
+
     # saves current parameters to .conf file
     def save_size(self):
         with open("myapp.conf", "w") as conf:
@@ -113,6 +121,7 @@ class MainApplication(tk.Frame):
     def __init__(self, window, *args, **kwargs):
         tk.Frame.__init__(self, window, *args, **kwargs)
         self.window = window
+        self.setup_apear()
         #self.set_gui_parameters() #set up font,window size form conf sife may be disabled
         self.setup_wigets()
 
