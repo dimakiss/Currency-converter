@@ -6,8 +6,8 @@ from tkinter import ttk
 
 class MainApplication(tk.Frame):
 
-    font = ("ariel", 12)
-
+    font = ('ariel', 11)
+    precision=4 #how many numbers after the "."
     # add icon and name to window
     def setup_apear(self):
         window.title("Currency convertor")
@@ -23,7 +23,7 @@ class MainApplication(tk.Frame):
 
     # create data in .conf file format
     def create_conf_data(self):
-        return self.window.geometry() + '\n'+"'"+str(self.font[0])+"',"+str(self.font[1])+'\n' + str(self.window.state())
+        return self.window.geometry() + '\n'+str(self.font[0])+","+str(self.font[1])+'\n' + str(self.window.state())
 
     # set up window parameters
     def set_gui_parameters(self):
@@ -33,6 +33,7 @@ class MainApplication(tk.Frame):
 
     # read conff file
     def get_info_of_conff_file(self,data):
+        global font
         temp = data.split("\n")
         self.window.geometry(temp[0])
         self.font=(str(temp[1]).split(',')[0], int(str(temp[1]).split(',')[1]))
@@ -49,10 +50,10 @@ class MainApplication(tk.Frame):
         number *= Decimal(self.Values[index_to]) / Decimal(self.Values[index_from])
         self.textbox_output.config(state=tk.NORMAL)
         self.textbox_output.delete("1.0", tk.END)
-        if Decimal(round((number), 4)) % Decimal(1.0) == 0:
+        if Decimal(round((number), self.precision)) % Decimal(1.0) == 0:
             number = Decimal(round((number), 1))
         else:
-            number = Decimal(round((number), 4))
+            number = Decimal(round((number), self.precision))
         self.textbox_output.insert(tk.END, number)
         self.textbox_output.config(state=tk.DISABLED)
 
@@ -67,10 +68,10 @@ class MainApplication(tk.Frame):
                 point = True
                 number += i
         number=float(number)
-        if Decimal(round(Decimal(number), 3)) % Decimal(1.0) == 0:
+        if Decimal(round(Decimal(number), self.precision)) % Decimal(1.0) == 0:
             number = Decimal(round(Decimal(number), 1))
         else:
-            number = Decimal(round(Decimal(number), 3))
+            number = Decimal(round(Decimal(number), self.precision))
 
         self.textbox_amount.delete("1.0", tk.END)
         self.textbox_amount.insert(tk.END, number)
@@ -95,7 +96,6 @@ class MainApplication(tk.Frame):
             for tr_tag in soup.find_all('tbody')[1]:
                 try:
                     td_tags = tr_tag.find_all('td')
-                    # print("Names %s price: %s" %(td_tags[0].text,td_tags[1].text))
                     exchanges.append([td_tags[0].text, td_tags[1].text])
 
                 except:
@@ -122,7 +122,7 @@ class MainApplication(tk.Frame):
         tk.Frame.__init__(self, window, *args, **kwargs)
         self.window = window
         self.setup_apear()
-        #self.set_gui_parameters() #set up font,window size form conf sife may be disabled
+        self.set_gui_parameters() #set up font,window size form conf sife may be disabled
         self.setup_wigets()
 
     # set up all the wigets and their settings
