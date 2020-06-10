@@ -15,5 +15,5 @@ pip install -r requirements.txt
 python cur_converter.py
 ```
 
-Your input is the amount of money u want to convert, from which currency to which currency.\
+Your input is the amount of money you want to convert, from which currency to which currency.\
 ![](pic.png)
