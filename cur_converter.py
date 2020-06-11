@@ -6,7 +6,7 @@ from tkinter import ttk
 
 class MainApplication(tk.Frame):
 
-    font = ('ariel', 11)
+    font = ('arial', 11)
     precision=4 #how many numbers after the "."
     # add icon and name to window
     def setup_apear(self):
