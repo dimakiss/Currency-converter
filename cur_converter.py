@@ -36,6 +36,7 @@ class MainApplication(tk.Frame):
         global font
         temp = data.split("\n")
         self.window.geometry(temp[0])
+        self.window.minsize(width=temp[0].split("+")[0].split("x")[0], height=temp[0].split("+")[0].split("x")[1])
         self.font=(str(temp[1]).split(',')[0], int(str(temp[1]).split(',')[1]))
         if temp[2] == 'zoomed':
             self.window.state('zoomed')
