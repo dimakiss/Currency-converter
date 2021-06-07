@@ -149,7 +149,7 @@ class MainApplication(tk.Frame):
         self.from_box.current(0)
         self.to_box.current(0)
 
-        self.Button_convert = tk.Button(self.window, text="Convert", command=self.convert)
+        self.Button_convert = tk.Button(self.window, text="Convert", command=self.convert,font=self.font)
 
 
         self.amount_lable.grid(row=0, column=1, sticky=tk.W)
